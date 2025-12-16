@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h4 class="fw-bold text-primary mb-3">
+    <i class="bi bi-link-45deg"></i> Allocate Resource
+</h4>
+
+{% if form.event_id.choices and form.resource_id.choices %}
+
+<!-- ✅ FORM SHOWS ONLY WHEN BOTH EXIST -->
+<div class="card p-4">
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            {{ form.event_id.label(class="form-label") }}
+            {{ form.event_id(class="form-select") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.resource_id.label(class="form-label") }}
+            {{ form.resource_id(class="form-select") }}
+        </div>
+
+        <button class="btn btn-warning">
+            <i class="bi bi-check-circle"></i> Allocate
+        </button>
+    </form>
+</div>
+
+{% else %}
+
+<!-- 🚫 EMPTY STATE -->
+<div class="text-center text-muted py-5">
+    <i class="bi bi-diagram-3 display-4 text-warning"></i>
+    <h6 class="mt-3">Allocation not possible yet</h6>
+    <p>You need at least one event and one resource before allocation.</p>
+
+    <a href="{{ url_for('add_event') }}" class="btn btn-primary btn-sm me-2">
+        Add Event
+    </a>
+    <a href="{{ url_for('add_resource') }}" class="btn btn-success btn-sm">
+        Add Resource
+    </a>
+</div>
+
+{% endif %}
+
+{% endblock %}

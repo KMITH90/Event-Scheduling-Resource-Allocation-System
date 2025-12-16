@@ -1,0 +1,30 @@
+body {
+    background-color: #f4f6f9;
+}
+
+h4, h2 {
+    color: #490dfd;
+}
+
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.table th {
+    background-color: #490dfd;
+    color: white;
+}
+
+.btn {
+    border-radius: 20px;
+}
+
+.form-control, .form-select {
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s ease;
+}

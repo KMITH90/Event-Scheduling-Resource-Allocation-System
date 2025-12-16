@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-bold text-primary">
+        <i class="bi bi-box-seam"></i> Resources
+    </h4>
+    <a href="{{ url_for('add_resource') }}" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Add Resource
+    </a>
+</div>
+
+<div class="card p-3">
+
+{% if resources %}
+<table class="table table-hover align-middle">
+    <thead>
+        <tr>
+            <th>Resource Name</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in resources %}
+        <tr>
+            <td><strong>{{ r.name }}</strong></td>
+            <td>
+                {% if r.type == 'Room' %}
+                    <span class="badge bg-primary">
+                        <i class="bi bi-door-open"></i> Room
+                    </span>
+                {% elif r.type == 'Instructor' %}
+                    <span class="badge bg-success">
+                        <i class="bi bi-person-badge"></i> Instructor
+                    </span>
+                {% else %}
+                <div class="text-center text-muted py-5">
+                    <i class="bi bi-box-seam display-4 text-success"></i>
+                    <h6 class="mt-3">No resources added</h6>
+                    <p>Add rooms, instructors, or equipment to allocate them to events.</p>
+                    <a href="{{ url_for('add_resource') }}" class="btn btn-success btn-sm">
+                        <i class="bi bi-plus-circle"></i> Add Resource
+                    </a>
+                </div>
+                {% endif %}
+
+            </td>
+            <td>
+                <a href="{{ url_for('edit_resource', resource_id=r.id) }}"
+                class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-pencil"></i>
+                </a>
+
+                <a href="{{ url_for('delete_resource', resource_id=r.id) }}"
+                class="btn btn-sm btn-outline-danger"
+                onclick="return confirm('Delete this resource?');">
+                    <i class="bi bi-trash"></i>
+                </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <div class="text-center text-muted py-4">
+        <i class="bi bi-box-seam display-4"></i>
+        <p class="mt-2">No resources added yet.</p>
+    </div>
+{% endif %}
+
+</div>
+
+{% endblock %}
